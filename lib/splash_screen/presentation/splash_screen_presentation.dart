@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../intor_slider/presentation/intro_slider.dart';
 import '../../login/presentation/phone_entry.dart';
 import '../../main_nav_page/presentation/main_nav_page.dart';
 import '../splash_controller/splash_controller.dart';
@@ -61,7 +62,7 @@ class OnBoard extends StatelessWidget {
     AuthenticationManager _authManager = Get.find();
 
     return Obx(() {
-      return _authManager.isLogged.value ? MainNavPage() : PhoneEntry();
+      return _authManager.isLogged.value ? MainNavPage() : IntroSliderPage();
     });
   }
 
