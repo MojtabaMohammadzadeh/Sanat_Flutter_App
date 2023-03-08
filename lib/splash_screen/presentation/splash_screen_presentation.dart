@@ -1,11 +1,11 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../intor_slider/presentation/intro_slider.dart';
+
+import '../../core/constants.dart';
+import '../../core/widgets/no_connection.dart';
+
 import '../../login/presentation/phone_entry.dart';
 import '../../main_nav_page/presentation/main_nav_page.dart';
 import '../splash_controller/splash_controller.dart';
@@ -17,11 +17,14 @@ class SplashScreen extends StatelessWidget {
 
 
   Future<void> initializeSettings() async {
+
     _authmanager.checkLoginStatus();
 
+
     //Simulate other services for 3 seconds
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(Duration(seconds: 4));
   }
+
 
 
   @override
@@ -37,9 +40,12 @@ class SplashScreen extends StatelessWidget {
           else
             return OnBoard();
         }
+
       },
     );
   }
+
+
 
   Scaffold errorView(AsyncSnapshot<Object?> snapshot) {
     return Scaffold(
@@ -52,7 +58,7 @@ class SplashScreen extends StatelessWidget {
   }
 }
 
-
+// *******************************Part02*******************************************
 
 class OnBoard extends StatelessWidget {
   const OnBoard({Key? key}) : super(key: key);
@@ -61,9 +67,11 @@ class OnBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     AuthenticationManager _authManager = Get.find();
 
-    return Obx(() {
-      return _authManager.isLogged.value ? MainNavPage() : IntroSliderPage();
-    });
+    return _authManager.isConnected ? Obx(() {
+      return _authManager.isLogged.value ? MainNavPage() : PhoneEntry();
+      // return _authManager.isLogged.value ? MainNavPage() : MainNavPage();
+
+    }): NoConnection();
   }
 
 }
@@ -99,31 +107,61 @@ class _FadeSplashWidgetState extends State<FadeSplashWidget> with SingleTickerPr
     super.dispose();
   }
   Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xff29A99B),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FadeTransition(
-                opacity:_animationController,
-                child: Container(
-                  width:50.w,
-                  height: 10.h,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("assets/img/Logo.png"),
-                        fit: BoxFit.fitWidth,
-                      )
+    return Scaffold(
+      body: Container(
+
+        decoration: BoxDecoration(
+          color: Color(0xffF5F5F5),
+          image: DecorationImage(
+            image: AssetImage("assets/img/bg_splash.jpg"),
+            fit: BoxFit.fill,
+
+          )
+        ),
+
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FadeTransition(
+                  opacity:_animationController,
+                  child: Container(
+                    width:150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                        image: DecorationImage(
+                          image: AssetImage("assets/img/Logo.png"),
+                          fit: BoxFit.fitHeight,
+                        )
+                    ),
                   ),
-                ),
-            ),
-            FadeTransition(opacity: _animationController,
-            child: Text("تسسسسست",style:TextStyle(fontSize: 24, color:Colors.white),),
-            ),
-          ],
+              ),
+              SizedBox(height: 16,),
+              FadeTransition(opacity: _animationController,
+              child: Text("ابزار صنعت",
+                style:TextStyle(fontSize: 20,
+                    fontFamily: "Dana",
+                    fontWeight:FontWeight.w700,
+                    color:primaryColor),
+                textDirection: TextDirection.rtl,),
+              ),
+              SizedBox(height: 16,),
+              FadeTransition(opacity: _animationController,
+              child: Text("هدف، برند ه شدن شماست",
+                style:TextStyle(fontSize: 16,
+                    fontFamily: "Dana",
+                    fontWeight:FontWeight.w700,
+                    color:ravenColor),
+                textDirection: TextDirection.rtl,),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+
+

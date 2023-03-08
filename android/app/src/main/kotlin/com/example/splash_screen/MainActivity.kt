@@ -1,4 +1,4 @@
-package com.example.splash_screen
+package fenix.team.aln.abzar_sanat
 
 import io.flutter.embedding.android.FlutterActivity
 
