@@ -45,13 +45,13 @@ class TabBarControll extends GetxController{
   var law = '';
   var link_app = '';
   //   // ***********************Init*********************
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    fetchProducts();
-
-    super.onInit();
-  }
+  // @override
+  // void onInit() {
+  //   // TODO: implement onInit
+  //   fetchProducts();
+  //
+  //   super.onInit();
+  // }
 
   // **************************Change Index***********************
   void changeIndex(Index){

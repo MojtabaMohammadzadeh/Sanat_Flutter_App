@@ -17,6 +17,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/constants.dart';
 
+import '../../core/widgets/image_maximize.dart';
 import '../controller/single_place_controller.dart';
 import '../widgets/violation.dart';
 
@@ -92,7 +93,8 @@ class _SinglePlacesPageState extends State<SinglePlacesPage> {
                   itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
                       GestureDetector(
                         onTap: (){
-                          _showModalDialog(context,_controller.singleSliderControll[itemIndex].img ?? "");
+                          Get.to(()=>ImageMaximize(img: _controller.singleSliderControll[itemIndex].img ?? ""));
+                          // _showModalDialog(context,_controller.singleSliderControll[itemIndex].img ?? "");
                         },
                         child: Container(
 
@@ -153,7 +155,10 @@ class _SinglePlacesPageState extends State<SinglePlacesPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IconButton(onPressed: (){_makingPhoneCall('tel://${_controller.phoneControll.replaceFirst('0', '+98')}');}, icon: const Icon(Icons.phone_android)),
+                    IconButton(onPressed: (){
+
+                      _makingPhoneCall('tel://${_controller.phoneControll.replaceFirst('0', '+98')}');
+                      }, icon: const Icon(Icons.phone_android)),
                     Text(_controller.phoneControll,
                       style: const TextStyle(fontSize: 13),
                       textDirection: TextDirection.rtl,

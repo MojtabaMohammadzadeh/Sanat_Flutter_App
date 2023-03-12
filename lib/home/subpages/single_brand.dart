@@ -5,6 +5,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:splash_screen/core/constants.dart';
 
@@ -99,9 +100,7 @@ class _SingleBrandState extends State<SingleBrandPage> {
                   );
                 }),
                 SizedBox(height: 16,),
-                GetBuilder<SingleBrandController>(
-                  builder: (_)=>(_controller.singleLastPrice.isNotEmpty)? LastPriceSingle(lastPriceData: _controller.singleLastPrice,):
-                  SizedBox(height: 5,),),
+
                 const SizedBox(height: 15,),
 
                 GetBuilder<SingleBrandController>(
@@ -135,9 +134,25 @@ class _SingleBrandState extends State<SingleBrandPage> {
                     margin: EdgeInsets.only(right: 20, left: 20),
                     child: ElevatedButton.icon(
                       onPressed:() {
-                        showModalBottomSheet(
+                        final snackBar = SnackBar(backgroundColor: Color(0xfff5f5f5),
+                          behavior: SnackBarBehavior.floating,
+                          duration: Duration(milliseconds: 1000),
+                          margin: EdgeInsets.only(bottom: 50, right: 32, left: 32),
+                          content: Container(
+                              width: 100.w,
+                              height: 20,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12)
+                              ),
+                              child:
+                              Center(child: Text('متاسفانه هنوز اطلاعات این بخش ثبت نشده است.',
+                                style: TextStyle(fontFamily: "Dana",fontSize: 12,color: ravenColor,
+                                    fontWeight: FontWeight.w500),textAlign:TextAlign.center,))),);
+                        (_controller.aboutDisc.isNotEmpty)?  showModalBottomSheet(
                             isScrollControlled: true,
-                            context: context, builder: (context)=> AboutUs());
+                            context: context, builder: (context)=> AboutUs()) :
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(Color(0xff0F1B6D).withOpacity(0)),
@@ -156,7 +171,25 @@ class _SingleBrandState extends State<SingleBrandPage> {
                     margin: EdgeInsets.only(right: 20,left: 20),
                     child: ElevatedButton.icon(
                       onPressed:() {
-                        showModalBottomSheet(
+                        final snackBar = SnackBar(backgroundColor: Color(0xfff5f5f5),
+                          behavior: SnackBarBehavior.floating,
+                          duration: Duration(milliseconds: 1000),
+                          margin: EdgeInsets.only(bottom: 50, right: 32, left: 32),
+                          content: Container(
+                              width: 100.w,
+                              height: 20,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12)
+                              ),
+                              child:
+                              Center(child: Text('متاسفانه هنوز اطلاعات این بخش ثبت نشده است.',
+                                style: TextStyle(fontFamily: "Dana",fontSize: 12,color: ravenColor,
+                                    fontWeight: FontWeight.w500),textAlign:TextAlign.center,))),);
+
+                        (_controller.phone.isEmpty && _controller.insta.isEmpty && _controller.fax.isEmpty)?
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar)
+
+                        :showModalBottomSheet(
                             isScrollControlled: true,
                             context: context, builder: (context)=> ContactUs());
                       },

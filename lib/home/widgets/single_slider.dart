@@ -11,6 +11,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../core/constants.dart';
+import '../../core/widgets/image_maximize.dart';
 import '../model/single_brand/slider_single_brand.dart';
 import '../subpages/products.dart';
 
@@ -32,7 +33,11 @@ class SingleImageSlider extends StatelessWidget {
       itemCount: slidersData.length,
       itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
           GestureDetector(
-            onTap: ()=>_showModalDialog(context,slidersData[itemIndex].img ?? ""),
+            onTap: (){
+                  Get.to(()=>ImageMaximize(img: slidersData[itemIndex].img ?? "",));
+              // _showModalDialog(context,slidersData[itemIndex].img ?? "")
+
+            },
             child: Container(
 
               margin: const EdgeInsets.symmetric(horizontal: 8,vertical: 8),
@@ -59,16 +64,16 @@ _showModalDialog(context,String img){
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          backgroundColor: Colors.black.withOpacity(0.0),
+          backgroundColor: grayWhiteColor,
           child: Container(
 
             constraints: BoxConstraints(
               maxHeight: 40.h,
-              maxWidth: 100.w,
+
             ),
             decoration: BoxDecoration(
               color: lightGrayColor,
-              borderRadius: BorderRadius.circular(15),
+
 
               image: DecorationImage(
                 image: NetworkImage(img),

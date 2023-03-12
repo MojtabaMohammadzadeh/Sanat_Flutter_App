@@ -34,6 +34,7 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
+    _tabcontroller.fetchProducts();
     super.initState();
     if(_tabcontroller.msg == '01'){
       _showDialog();

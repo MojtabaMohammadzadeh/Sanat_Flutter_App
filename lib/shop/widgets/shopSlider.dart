@@ -5,9 +5,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../core/constants.dart';
+import '../../core/widgets/image_maximize.dart';
 import '../model/shop_sliders.dart';
 
 class ShopImageSlider extends StatelessWidget {
@@ -28,7 +31,11 @@ class ShopImageSlider extends StatelessWidget {
       itemCount: slidersData.length,
       itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
           GestureDetector(
-            onTap: ()=>_showModalDialog(context,slidersData[itemIndex].img ?? ""),
+            onTap: (){
+              Get.to(()=>ImageMaximize(img: slidersData[itemIndex].img ?? "",));
+              // _showModalDialog(context,slidersData[itemIndex].img ?? ""),
+
+            },
             child: Container(
 
               width: 85.w,
@@ -48,29 +55,29 @@ class ShopImageSlider extends StatelessWidget {
   }
 }
 
-_showModalDialog(context,String img){
-  showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          backgroundColor: Colors.black.withOpacity(0.0),
-          child: Container(
-
-            constraints: BoxConstraints(
-              maxHeight: 40.h,
-              maxWidth: 100.w,
-            ),
-            decoration: BoxDecoration(
-              color: lightGrayColor,
-              borderRadius: BorderRadius.circular(15),
-
-              image: DecorationImage(
-                image: NetworkImage(img),
-                fit: BoxFit.fill,
-              ),
-            ),
-
-          ),
-        );
-      });
-}
+// _showModalDialog(context,String img){
+//   showDialog(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return Dialog(
+//           backgroundColor: Colors.black.withOpacity(0.0),
+//           child: Container(
+//
+//             constraints: BoxConstraints(
+//               maxHeight: 40.h,
+//               maxWidth: 100.w,
+//             ),
+//             decoration: BoxDecoration(
+//               color: lightGrayColor,
+//               borderRadius: BorderRadius.circular(15),
+//
+//               image: DecorationImage(
+//                 image: NetworkImage(img),
+//                 fit: BoxFit.fill,
+//               ),
+//             ),
+//
+//           ),
+//         );
+//       });
+// }

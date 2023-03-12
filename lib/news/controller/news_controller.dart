@@ -23,7 +23,7 @@ class NewsController extends GetxController{
   }
 
 
-   fetchNews() async{
+         fetchNews() async{
 
     isLoading(true);
 
@@ -32,7 +32,7 @@ class NewsController extends GetxController{
       responses = await NewsRemote.fetchNews();
 
       if (responses != null){
-
+        News.clear();
         responses.forEach((element) {
           News.add(element);
 

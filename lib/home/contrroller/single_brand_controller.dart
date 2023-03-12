@@ -27,6 +27,7 @@ class SingleBrandController extends GetxController{
   var phone = '';
   var insta = '';
   var fax = '';
+  var sms = '';
 
   // @override
   // void onInit() {
@@ -54,35 +55,33 @@ class SingleBrandController extends GetxController{
         phone = singleBrand.contact?.phone ?? "";
         insta = singleBrand.contact?.insta ?? "";
         fax = singleBrand.contact?.fax ?? "";
-        // singleBrand.lastPrice?.forEach((element) {
-        //   controllLastPrice.add(element);
-        //   update();
-        // });
+        sms = singleBrand.contact?.sms ?? "";
 
-        // int j = 0;
+        singleBrand.slider?.forEach((element) {
+          controllSlider.add(element);
+          update();
+        });
+
+        isLoading(false);
         singleBrand.listCategory?.forEach((element) {
-          controllCategoryList.add(element);
-          update();
+          if(element.products.isNotEmpty){
+            controllCategoryList.add(element);
+            update();
+          }
         });
 
-        singleBrand.slider?.forEach((element) {
-          controllSlider.add(element);
-          update();
-        });
 
-        singleBrand.slider?.forEach((element) {
-          controllSlider.add(element);
-          update();
-        });
+
+
       }
-      var BlastPrice = await SingleBrandRemote.fetchSingleBrandlastPrice(brandId);
-
-      if(BlastPrice?.lastPrice != null){
-        BlastPrice?.lastPrice?.forEach((element) {
-          singleLastPrice.add(element);
-          update();
-        });
-      }
+      // var BlastPrice = await SingleBrandRemote.fetchSingleBrandlastPrice(brandId);
+      //
+      // if(BlastPrice?.lastPrice != null){
+      //   BlastPrice?.lastPrice?.forEach((element) {
+      //     singleLastPrice.add(element);
+      //     update();
+      //   });
+      // }
 
     }finally{
       isLoading(false);

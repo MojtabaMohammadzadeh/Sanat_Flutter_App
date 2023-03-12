@@ -10,6 +10,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../core/constants.dart';
+import '../../core/widgets/image_maximize.dart';
 import '../../main_nav_page/presentation/main_nav_page.dart';
 import '../contrroller/product_controller.dart';
 import '../model/single_brand/products.dart';
@@ -69,7 +70,9 @@ class _ProductsPageState extends State<ProductsPage> {
               children: [
                 GestureDetector(
                   onTap: (){
-                    _showModalDialog(context,widget.productData[currentIndex].img);
+
+                    Get.to(()=>ImageMaximize(img: widget.productData[currentIndex].img,));
+                    // _showModalDialog(context,widget.productData[currentIndex].img);
                   },
                   child: Container(
 
@@ -94,11 +97,11 @@ class _ProductsPageState extends State<ProductsPage> {
 
                 ),
                 SizedBox(height: 16,),
-                Container(
-                  width: 100.w,
-                  margin: EdgeInsets.symmetric(horizontal: 16),
-                  child:Center(child: Text('قیمت:  ${widget.productData[currentIndex].price.toString()} تومان',style: const TextStyle(fontSize: 14,fontWeight:FontWeight.w700 ,fontFamily: 'DanaFaNum'),textDirection: TextDirection.rtl,)),
-                ),
+                // Container(
+                //   width: 100.w,
+                //   margin: EdgeInsets.symmetric(horizontal: 16),
+                //   child:Center(child: Text('قیمت:  ${widget.productData[currentIndex].price.toString()} تومان',style: const TextStyle(fontSize: 14,fontWeight:FontWeight.w700 ,fontFamily: 'DanaFaNum'),textDirection: TextDirection.rtl,)),
+                // ),
 
 
                 SizedBox(height: 16,),
